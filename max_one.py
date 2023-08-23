@@ -3,7 +3,7 @@ import random
 # Parametros
 NUM_CROMOSOMAS = 100
 NUM_GENES = 20
-NUM_GENERACIONES = 100
+NUM_GENERACIONES = 200
 PROB_MUTACION = 0.5
 PORCENTAJE_ELITISMO = 0.1
 
@@ -49,6 +49,7 @@ for generacion in range(NUM_GENERACIONES):
         nueva_poblacion.extend([hijo1, hijo2])
 
     poblacion = nueva_poblacion
+    print(len(poblacion))
 
 mejor_cromosoma = max(poblacion, key=evaluar_fitness)
 print("Cromosoma óptimo: ", mejor_cromosoma)
