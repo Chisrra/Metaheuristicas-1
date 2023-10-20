@@ -36,15 +36,20 @@ class AlgoritmoGenetico(ABC):
     def best(self, poblacion:list):
         return max(poblacion, key=self.evaluar_fitness)
 
+    def getElite(self, poblacion:list):
+        num_elitismo = int(self.num_cromosomas * self.porcentaje_elitismo)
+        return sorted(poblacion, key=self.evaluar_fitness, reverse=True)[:num_elitismo]
+
+    def crear_poblacion(self):
+        return [self.crear_cromosoma() for _ in range(self.num_cromosomas)]
+
     def fit(self, poblacion:list = None):
         if poblacion == None:
-            poblacion = [self.crear_cromosoma() for _ in range(self.num_cromosomas)]
+            poblacion = self.crear_poblacion()
 
         for _ in range(self.num_generaciones):
             nueva_poblacion = []
-
-            num_elitismo = int(self.num_cromosomas * self.porcentaje_elitismo)
-            nueva_poblacion.extend(sorted(poblacion, key=self.evaluar_fitness, reverse=True)[:num_elitismo])
+            nueva_poblacion.extend(self.getElite(poblacion))
 
             while (len(nueva_poblacion) + 2) <= (self.num_cromosomas):
 
