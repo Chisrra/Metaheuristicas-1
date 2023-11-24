@@ -1,5 +1,6 @@
 *.docx
 *.rar
 *.pdf
+*.csv
 docs/
 __pycache__/
